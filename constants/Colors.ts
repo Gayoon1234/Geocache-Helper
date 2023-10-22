@@ -16,4 +16,7 @@ export default {
     tabIconDefault: "#283618",
     tabIconSelected: tintColorDark,
   },
+  yolo: {
+    wood: "#DDA15E",
+  },
 };
