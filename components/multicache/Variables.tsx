@@ -51,23 +51,44 @@ const Variables: React.FC<VariablesProps> = ({ variables, setVariables }) => {
 
   return (
     <View style={styles.container}>
+      <Text style={styles.heading}>Variables</Text>
       <Modal visible={isModalVisible} transparent={true} animationType="fade">
         <View style={styles.modalContainer}>
           <TextInput
             style={styles.input}
-            placeholder="Variable Name"
+            placeholder="Name"
             value={variableName}
             onChangeText={(text) => setVariableName(text)}
+            placeholderTextColor={Colors.theme.Cornsilk}
           />
           <TextInput
             style={styles.input}
-            placeholder="Variable Value"
+            placeholder="Value"
             value={variableValue}
             onChangeText={(text) => setVariableValue(text)}
+            placeholderTextColor={Colors.theme.Cornsilk}
           />
           <View style={styles.buttonContainer}>
-            <Button title="Add Variable" onPress={addVariable} />
-            <Button title="Cancel" onPress={toggleModal} />
+            <Pressable
+              onPress={addVariable}
+              style={[styles.fauxButton, { flex: 0.8 }]}
+            >
+              <FontAwesome
+                name="check"
+                style={{ textAlign: "center", color: Colors.theme.Pakistan }}
+                size={25}
+              />
+            </Pressable>
+            <Pressable
+              onPress={toggleModal}
+              style={[styles.fauxButton, { flex: 0.2 }]}
+            >
+              <FontAwesome
+                name="close"
+                style={{ textAlign: "center", color: Colors.theme.EarthYellow }}
+                size={25}
+              />
+            </Pressable>
           </View>
         </View>
       </Modal>
@@ -120,7 +141,12 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     paddingHorizontal: 10,
     borderWidth: 1,
-    borderColor: "#ccc",
+    borderColor: Colors.theme.Cornsilk,
+    color: Colors.theme.Cornsilk,
+    backgroundColor: Colors.theme.DarkMoss,
+    fontSize: 20,
+    borderRadius: 8,
+    padding: 5,
   },
   buttonContainer: {
     flexDirection: "row",
@@ -145,9 +171,11 @@ const styles = StyleSheet.create({
     justifyContent: "flex-start",
   },
   heading: {
-    fontSize: 18,
-    fontWeight: "bold",
-    marginVertical: 10,
+    textAlign: "center",
+    fontSize: 24,
+    paddingTop: 5,
+    paddingBottom: 15,
+    color: Colors.theme.TigersEye,
   },
   variableText: {
     fontSize: 16,

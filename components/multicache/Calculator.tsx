@@ -87,7 +87,7 @@ const Calculator: React.FC<CalculatorProps> = ({ variables }) => {
         return expression;
       }
     }
-    console.log(evaluatedCoordinate);
+    // console.log(evaluatedCoordinate);
     const latString = `${evaluatedCoordinate.lat.direction} ${evaluatedCoordinate.lat.degrees} ${evaluatedCoordinate.lat.minutes}`;
     const longString = `${evaluatedCoordinate.long.direction} ${evaluatedCoordinate.long.degrees} ${evaluatedCoordinate.long.minutes}`;
 
@@ -169,8 +169,20 @@ const Calculator: React.FC<CalculatorProps> = ({ variables }) => {
           </Pressable>
         </View>
         {finalCoordinate && (
-          <View>
-            <Text style={[styles.heading, { paddingTop: 30 }]}>
+          <View
+            style={{
+              borderColor: Colors.theme.Pakistan,
+              borderWidth: 2,
+              borderRadius: 10,
+              borderStyle: "dashed",
+              width: "80%",
+              alignSelf: "center",
+              marginTop: 20,
+              paddingBottom: 10,
+            }}
+          >
+            <Text style={[styles.heading, { paddingTop: 30 }]}>Result</Text>
+            <Text style={[styles.heading, { paddingTop: 10 }]}>
               {finalCoordinate}
             </Text>
             <Pressable
@@ -234,6 +246,7 @@ const styles = StyleSheet.create({
   fauxButton: {
     backgroundColor: Colors.theme.Pakistan,
     padding: 10,
+    paddingVertical: 20,
     margin: 2,
     borderRadius: 10,
   },
