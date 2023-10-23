@@ -1,18 +1,19 @@
 import Colors from "../../constants/Colors";
 import { View, Text } from "../Themed";
-import { StyleSheet } from "react-native";
+import { Pressable, StyleSheet } from "react-native";
 
 interface TagProps {
   name: string;
   value: string;
+  remove: (name: string) => void;
 }
-const Tag: React.FC<TagProps> = ({ name, value }) => {
+const Tag: React.FC<TagProps> = ({ name, value, remove }) => {
   return (
-    <View style={styles.tag}>
+    <Pressable style={styles.tag} onPress={() => remove(name)}>
       <Text style={styles.text}>
         {name}={value}
       </Text>
-    </View>
+    </Pressable>
   );
 };
 

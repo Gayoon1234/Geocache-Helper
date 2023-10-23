@@ -12,8 +12,12 @@ import Tag from "../helper/tag";
 import Colors from "../../constants/Colors";
 import { FontAwesome } from "@expo/vector-icons";
 
+interface Variable {
+  name: string;
+  value: string;
+}
 interface VariablesProps {
-  variables: { name: string; value: string }[];
+  variables: Variable[];
   setVariables: React.Dispatch<
     React.SetStateAction<{ name: string; value: string }[]>
   >;
@@ -34,6 +38,11 @@ const Variables: React.FC<VariablesProps> = ({ variables, setVariables }) => {
       setVariableValue("");
       toggleModal();
     }
+  };
+
+  const removeVariable = (name: string) => {
+    const newVariables = variables.filter((v: Variable) => v.name !== name);
+    setVariables(newVariables);
   };
 
   const toggleModal = () => {
@@ -64,7 +73,7 @@ const Variables: React.FC<VariablesProps> = ({ variables, setVariables }) => {
       </Modal>
       <View style={styles.variablesContainer}>
         {variables.map((v, i) => (
-          <Tag name={v.name} value={v.value} key={i} />
+          <Tag name={v.name} value={v.value} remove={removeVariable} key={i} />
         ))}
       </View>
       <View style={styles.AddClearContainer}>
@@ -147,3 +156,6 @@ const styles = StyleSheet.create({
 });
 
 export default Variables;
+function v(value: Variable, index: number, array: Variable[]): unknown {
+  throw new Error("Function not implemented.");
+}

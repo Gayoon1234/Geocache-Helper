@@ -24,20 +24,6 @@ const Calculator: React.FC<CalculatorProps> = ({ variables }) => {
   };
 
   const handleCalc = () => {
-    // console.group();
-    // console.log("NorthSouth");
-    // console.log(northSouthDirection);
-    // console.log(northDegrees);
-    // console.log(northMinutes);
-    // console.log("WestEast");
-    // console.log(eastWestDirection);
-    // console.log(eastDegrees);
-    // console.log(eastMinutes);
-    // console.groupEnd();
-
-    // FYI
-    // long - vertical
-    // lat - horizontal
     let coordinate = {
       lat: {
         direction: northSouthDirection,
@@ -50,7 +36,7 @@ const Calculator: React.FC<CalculatorProps> = ({ variables }) => {
         minutes: eastMinutes,
       },
     };
-    console.log(coordinate);
+    // console.log(coordinate);
 
     variables.forEach((v) => {
       const { name, value } = v;
@@ -77,7 +63,7 @@ const Calculator: React.FC<CalculatorProps> = ({ variables }) => {
       );
     });
 
-    console.log(coordinate);
+    // console.log(coordinate);
 
     const evaluatedCoordinate = {
       lat: {
@@ -107,12 +93,11 @@ const Calculator: React.FC<CalculatorProps> = ({ variables }) => {
 
     const formattedString = `${latString} ${longString}`;
 
-    console.log(formattedString);
+    // console.log(formattedString);
     setFinalCoordinate(formattedString);
   };
 
   return (
-    // <View style={styles.container}>
     <>
       <Text style={styles.heading}>Calculator</Text>
       <View style={styles.container}>
@@ -206,7 +191,7 @@ const Calculator: React.FC<CalculatorProps> = ({ variables }) => {
 };
 
 const baseInputStyle = {
-  paddingHorizontal: 8,
+  paddingHorizontal: 4,
   fontSize: 24,
 };
 
@@ -233,11 +218,11 @@ const styles = StyleSheet.create({
     ...baseInputStyle,
   },
   inputDirection: {
-    flex: 0.2,
+    flex: 0.05,
     ...baseInputStyle,
   },
   inputDegree: {
-    flex: 0.3,
+    flex: 0.2,
     ...baseInputStyle,
   },
   CalcSaveContainer: {
