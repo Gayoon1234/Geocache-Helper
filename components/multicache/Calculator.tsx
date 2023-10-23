@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { Text } from "../Themed";
-import { StyleSheet, TextInput, View } from "react-native";
+import { Pressable, StyleSheet, TextInput, View } from "react-native";
 import Colors from "../../constants/Colors";
-
+import { FontAwesome } from "@expo/vector-icons";
+// import Clipboard from "@react-native-clipboard/clipboard";
+import { Clipboard } from "react-native";
 interface CalculatorProps {
   variables: { name: string; value: string }[];
 }
@@ -15,6 +17,99 @@ const Calculator: React.FC<CalculatorProps> = ({ variables }) => {
   const [eastWestDirection, setEastWestDirection] = useState("E");
   const [eastDegrees, setEastDegrees] = useState("144");
   const [eastMinutes, setEastMinutes] = useState("");
+  const [finalCoordinate, setFinalCoordinate] = useState("");
+
+  const copyToClipboard = () => {
+    Clipboard.setString(finalCoordinate);
+  };
+
+  const handleCalc = () => {
+    // console.group();
+    // console.log("NorthSouth");
+    // console.log(northSouthDirection);
+    // console.log(northDegrees);
+    // console.log(northMinutes);
+    // console.log("WestEast");
+    // console.log(eastWestDirection);
+    // console.log(eastDegrees);
+    // console.log(eastMinutes);
+    // console.groupEnd();
+
+    // FYI
+    // long - vertical
+    // lat - horizontal
+    let coordinate = {
+      lat: {
+        direction: northSouthDirection,
+        degrees: northDegrees,
+        minutes: northMinutes,
+      },
+      long: {
+        direction: eastWestDirection,
+        degrees: eastDegrees,
+        minutes: eastMinutes,
+      },
+    };
+    console.log(coordinate);
+
+    variables.forEach((v) => {
+      const { name, value } = v;
+      const replaceRegex = new RegExp(name, "g");
+
+      // Update latitude degrees and minutes
+      coordinate.lat.degrees = coordinate.lat.degrees.replace(
+        replaceRegex,
+        value
+      );
+      coordinate.lat.minutes = coordinate.lat.minutes.replace(
+        replaceRegex,
+        value
+      );
+
+      // Update longitude degrees and minutes
+      coordinate.long.degrees = coordinate.long.degrees.replace(
+        replaceRegex,
+        value
+      );
+      coordinate.long.minutes = coordinate.long.minutes.replace(
+        replaceRegex,
+        value
+      );
+    });
+
+    console.log(coordinate);
+
+    const evaluatedCoordinate = {
+      lat: {
+        direction: coordinate.lat.direction,
+        degrees: parseFloat(coordinate.lat.degrees),
+        minutes: evalExpression(coordinate.lat.minutes),
+      },
+      long: {
+        direction: coordinate.long.direction,
+        degrees: parseFloat(coordinate.long.degrees),
+        minutes: evalExpression(coordinate.long.minutes),
+      },
+    };
+
+    function evalExpression(expression: string) {
+      const values = expression.split(".");
+      try {
+        const final = `${eval(values[0])}.${eval(values[1])}`;
+        return final;
+      } catch (error) {
+        return expression;
+      }
+    }
+    console.log(evaluatedCoordinate);
+    const latString = `${evaluatedCoordinate.lat.direction} ${evaluatedCoordinate.lat.degrees} ${evaluatedCoordinate.lat.minutes}`;
+    const longString = `${evaluatedCoordinate.long.direction} ${evaluatedCoordinate.long.degrees} ${evaluatedCoordinate.long.minutes}`;
+
+    const formattedString = `${latString} ${longString}`;
+
+    console.log(formattedString);
+    setFinalCoordinate(formattedString);
+  };
 
   return (
     // <View style={styles.container}>
@@ -63,6 +158,48 @@ const Calculator: React.FC<CalculatorProps> = ({ variables }) => {
             onChangeText={setEastMinutes}
           />
         </View>
+
+        <View style={styles.CalcSaveContainer}>
+          <Pressable
+            onPress={handleCalc}
+            style={[styles.fauxButton, { flex: 0.8 }]}
+          >
+            <FontAwesome
+              name="calculator"
+              style={{ textAlign: "center", color: Colors.theme.TigersEye }}
+              size={20}
+            />
+          </Pressable>
+          <Pressable
+            onPress={() => {
+              alert("Coming soon");
+            }}
+            style={[styles.fauxButton, { flex: 0.2 }]}
+          >
+            <FontAwesome
+              name="save"
+              style={{ textAlign: "center", color: Colors.theme.TigersEye }}
+              size={20}
+            />
+          </Pressable>
+        </View>
+        {finalCoordinate && (
+          <View>
+            <Text style={[styles.heading, { paddingTop: 30 }]}>
+              {finalCoordinate}
+            </Text>
+            <Pressable
+              onPress={copyToClipboard}
+              style={[styles.fauxButton, { width: "20%", alignSelf: "center" }]}
+            >
+              <FontAwesome
+                name="copy"
+                style={{ textAlign: "center", color: Colors.theme.TigersEye }}
+                size={20}
+              />
+            </Pressable>
+          </View>
+        )}
       </View>
     </>
   );
@@ -102,6 +239,18 @@ const styles = StyleSheet.create({
   inputDegree: {
     flex: 0.3,
     ...baseInputStyle,
+  },
+  CalcSaveContainer: {
+    display: "flex",
+    flexDirection: "row",
+    width: "80%",
+    alignSelf: "center",
+  },
+  fauxButton: {
+    backgroundColor: Colors.theme.Pakistan,
+    padding: 10,
+    margin: 2,
+    borderRadius: 10,
   },
 });
 
