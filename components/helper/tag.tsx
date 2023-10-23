@@ -1,3 +1,4 @@
+import Colors from "../../constants/Colors";
 import { View, Text } from "../Themed";
 import { StyleSheet } from "react-native";
 
@@ -8,7 +9,7 @@ interface TagProps {
 const Tag: React.FC<TagProps> = ({ name, value }) => {
   return (
     <View style={styles.tag}>
-      <Text>
+      <Text style={styles.text}>
         {name}={value}
       </Text>
     </View>
@@ -17,11 +18,14 @@ const Tag: React.FC<TagProps> = ({ name, value }) => {
 
 const styles = StyleSheet.create({
   tag: {
-    backgroundColor: "#000",
+    backgroundColor: Colors.theme.DarkMoss,
     padding: 7,
     borderRadius: 20,
     alignSelf: "flex-start",
     margin: 5,
+  },
+  text: {
+    fontSize: 18,
   },
 });
 export default Tag;

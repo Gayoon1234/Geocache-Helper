@@ -3,6 +3,7 @@ import { Text, View } from "../../components/Themed";
 import Colors from "../../constants/Colors";
 import Variables from "../../components/multicache/Variables";
 import { useState } from "react";
+import Calculator from "../../components/multicache/Calculator";
 
 export default function TabOneScreen() {
   const [variables, setVariables] = useState<{ name: string; value: string }[]>(
@@ -20,7 +21,7 @@ export default function TabOneScreen() {
           { backgroundColor: Colors.yolo.wood },
         ]}
       >
-        <Text style={styles.title}>Item 2</Text>
+        <Calculator variables={variables} />
       </View>
     </View>
   );
@@ -38,8 +39,8 @@ const styles = StyleSheet.create({
   coordinateContainter: {
     height: "70%",
     backgroundColor: "#ccc",
-    borderTopLeftRadius: 10,
-    borderTopRightRadius: 10,
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
     borderBottomRightRadius: 0,
     borderBottomLeftRadius: 0,
   },

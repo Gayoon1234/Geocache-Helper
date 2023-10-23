@@ -26,7 +26,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="index"
         options={{
-          title: "Tab One",
+          title: "Multi Cache Helper",
           tabBarIcon: ({ color }) => (
             <TabBarIcon name="bicycle" color={color} />
           ),

@@ -1,6 +1,16 @@
 import React, { useState } from "react";
-import { Button, Modal, TextInput, View, Text, StyleSheet } from "react-native";
+import {
+  Button,
+  Modal,
+  TextInput,
+  View,
+  Text,
+  StyleSheet,
+  Pressable,
+} from "react-native";
 import Tag from "../helper/tag";
+import Colors from "../../constants/Colors";
+import { FontAwesome } from "@expo/vector-icons";
 
 interface VariablesProps {
   variables: { name: string; value: string }[];
@@ -52,20 +62,35 @@ const Variables: React.FC<VariablesProps> = ({ variables, setVariables }) => {
           </View>
         </View>
       </Modal>
-      {/* <Text style={styles.heading}>Variables:</Text> */}
-
       <View style={styles.variablesContainer}>
         {variables.map((v, i) => (
           <Tag name={v.name} value={v.value} key={i} />
         ))}
       </View>
-      <Button title="Add" onPress={toggleModal} />
-      <Button
-        title="Clear"
-        onPress={() => {
-          setVariables([]);
-        }}
-      />
+      <View style={styles.AddClearContainer}>
+        <Pressable
+          onPress={toggleModal}
+          style={[styles.fauxButton, { flex: 0.8 }]}
+        >
+          <FontAwesome
+            name="plus"
+            style={{ textAlign: "center", color: Colors.theme.Pakistan }}
+            size={20}
+          />
+        </Pressable>
+        <Pressable
+          onPress={() => {
+            setVariables([]);
+          }}
+          style={[styles.fauxButton, { flex: 0.2 }]}
+        >
+          <FontAwesome
+            name="eraser"
+            style={{ textAlign: "center", color: Colors.theme.Pakistan }}
+            size={20}
+          />
+        </Pressable>
+      </View>
     </View>
   );
 };
@@ -92,6 +117,17 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-around",
     width: "80%",
+  },
+  AddClearContainer: {
+    display: "flex",
+    flexDirection: "row",
+    width: "100%",
+  },
+  fauxButton: {
+    backgroundColor: Colors.theme.TigersEye,
+    padding: 10,
+    margin: 2,
+    borderRadius: 10,
   },
   variablesContainer: {
     flex: 1,
