@@ -36,5 +36,6 @@ npm install
 - Splash Page logo: https://www.adobe.com/express/create/logo
 
 ## Screenshot
-![image](https://github.com/Gayoon1234/Geocache-Helper/assets/67247345/dc1e2f87-ab4e-4a49-ae02-59a535fc2405)
+![image](https://github.com/Gayoon1234/Geocache-Helper/assets/67247345/aabe1e3f-c318-48fb-8935-3bbd20d83a17)
+
 
