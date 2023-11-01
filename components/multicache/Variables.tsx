@@ -52,6 +52,11 @@ const Variables: React.FC<VariablesProps> = ({ variables, setVariables }) => {
   return (
     <View style={styles.container}>
       <Text style={styles.heading}>Variables</Text>
+      {variables.length > 0 && (
+        <Text style={styles.subtitle}>
+          You can tap on the variable to delete it.
+        </Text>
+      )}
       <Modal visible={isModalVisible} transparent={true} animationType="fade">
         <View style={styles.modalContainer}>
           <TextInput
@@ -173,8 +178,11 @@ const styles = StyleSheet.create({
   heading: {
     textAlign: "center",
     fontSize: 24,
-    paddingTop: 5,
-    paddingBottom: 15,
+    color: Colors.theme.TigersEye,
+  },
+  subtitle: {
+    textAlign: "center",
+    fontSize: 12,
     color: Colors.theme.TigersEye,
   },
   variableText: {
