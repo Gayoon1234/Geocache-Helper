@@ -5,6 +5,7 @@ import Colors from "../../constants/Colors";
 import { FontAwesome } from "@expo/vector-icons";
 // import Clipboard from "@react-native-clipboard/clipboard";
 import { Clipboard } from "react-native";
+import * as SecureStore from "expo-secure-store";
 interface CalculatorProps {
   variables: { name: string; value: string }[];
 }
@@ -92,6 +93,40 @@ const Calculator: React.FC<CalculatorProps> = ({ variables }) => {
     setFinalCoordinate(formattedString);
   };
 
+  const save = async () => {
+    let result = await SecureStore.getItemAsync("saved");
+    const newObject = {
+      title: "TestTitle-" + Date.now(),
+      variables: variables,
+      coordinates: {
+        lat: {
+          direction: northSouthDirection,
+          degrees: northDegrees,
+          minutes: northMinutes,
+        },
+        long: {
+          direction: eastWestDirection,
+          degrees: eastDegrees,
+          minutes: eastMinutes,
+        },
+      },
+    };
+
+    //when local storage is not empty
+    console.log(result);
+    if (result) {
+      const existingData = JSON.parse(result);
+      existingData.saved.push(newObject);
+      const updatedSaved = JSON.stringify(existingData);
+      await SecureStore.setItemAsync("saved", updatedSaved);
+      //when local storage is empty
+    } else {
+      const newSaved = JSON.stringify({ saved: [newObject] });
+      await SecureStore.setItemAsync("saved", newSaved);
+    }
+    alert("Your thing was saved");
+  };
+
   return (
     <>
       <Text style={styles.heading}>Calculator</Text>
@@ -152,7 +187,7 @@ const Calculator: React.FC<CalculatorProps> = ({ variables }) => {
           </Pressable>
           <Pressable
             onPress={() => {
-              alert("Coming soon");
+              save();
             }}
             style={[styles.fauxButton, { flex: 0.2 }]}
           >
