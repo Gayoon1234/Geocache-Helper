@@ -1,14 +1,12 @@
-interface Coordinates {
-  direction: "N" | "S" | "E" | "W";
-  degrees: string;
-  minutes: string;
+export default interface Variable {
+  name: string;
+  value: string;
 }
-
 export default interface SavedPuzzleModel {
   title: string;
-  variables: Record<string, string>;
+  variables: Variable[];
   coordinates: {
-    lat: Coordinates;
-    long: Coordinates;
+    lat: { direction: string; degrees: string; minutes: string };
+    long: { direction: string; degrees: string; minutes: string };
   };
 }

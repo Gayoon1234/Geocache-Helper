@@ -8,8 +8,10 @@ import { Clipboard } from "react-native";
 // import * as SecureStore from "expo-secure-store";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useSaveData } from "../../app/contexts/SaveDataContext";
+import SavedPuzzleModel from "../../app/models/SavedPuzzleModel";
+import Variable from "../../app/models/SavedPuzzleModel";
 interface CalculatorProps {
-  variables: { name: string; value: string }[];
+  variables: Variable[];
 }
 
 const Calculator: React.FC<CalculatorProps> = ({ variables }) => {
@@ -99,8 +101,8 @@ const Calculator: React.FC<CalculatorProps> = ({ variables }) => {
   };
 
   const save = async () => {
-    let result = await AsyncStorage.getItem("saved");
-    const newObject = {
+    // let result = await AsyncStorage.getItem("saved");
+    const newObject: SavedPuzzleModel = {
       title: "DateTime-" + Date.now(),
       variables: variables,
       coordinates: {
@@ -115,19 +117,16 @@ const Calculator: React.FC<CalculatorProps> = ({ variables }) => {
           minutes: eastMinutes,
         },
       },
+      name: "",
+      value: "",
     };
 
     //when local storage is not empty
-    console.log(result);
-    if (result) {
-      const existingData = JSON.parse(result);
-      existingData.saved.push(newObject);
-      const updatedSaved = JSON.stringify(existingData);
-      await AsyncStorage.setItem("saved", updatedSaved);
+    if (saveData) {
+      setSaveData([...saveData, newObject as SavedPuzzleModel]);
       //when local storage is empty
     } else {
-      const newSaved = JSON.stringify({ saved: [newObject] });
-      await AsyncStorage.setItem("saved", newSaved);
+      setSaveData([newObject as SavedPuzzleModel]);
     }
     alert("Your thing was saved");
   };

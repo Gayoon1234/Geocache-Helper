@@ -12,11 +12,8 @@ import {
 import Tag from "../helper/tag";
 import Colors from "../../constants/Colors";
 import { FontAwesome } from "@expo/vector-icons";
+import Variable from "../../app/models/SavedPuzzleModel";
 
-interface Variable {
-  name: string;
-  value: string;
-}
 interface VariablesProps {
   variables: Variable[];
   setVariables: React.Dispatch<
