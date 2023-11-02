@@ -3,16 +3,24 @@ import { Text, View } from "../../components/Themed";
 import Colors from "../../constants/Colors";
 import { FontAwesome } from "@expo/vector-icons";
 import SavedPuzzleModel from "../../app/models/SavedPuzzleModel";
+import { useSaveData } from "../../app/contexts/SaveDataContext";
 
 interface CardProps {
   savedPuzzle: SavedPuzzleModel;
 }
 const SavedPuzzleCard: React.FC<CardProps> = ({ savedPuzzle }) => {
+  const { saveData, setSaveData } = useSaveData();
+
+  const remove = () => {
+    if (saveData) {
+      setSaveData(saveData.filter((x) => x.title !== savedPuzzle.title));
+    }
+  };
   return (
     <View style={styles.container}>
       <Text style={styles.text}>{savedPuzzle.title}</Text>
       <View style={styles.iconBox}>
-        <Pressable>
+        <Pressable onPress={remove}>
           <FontAwesome name="trash" style={styles.icon} size={20} />
         </Pressable>
         <FontAwesome name="edit" style={styles.icon} size={20} />
