@@ -19,7 +19,10 @@ const SavedPuzzleCard: React.FC<CardProps> = ({ savedPuzzle }) => {
   };
 
   const edit = () => {
-    router.push("/(tabs)/");
+    router.push({
+      pathname: "/(tabs)/",
+      params: { puzzle: savedPuzzle.title },
+    });
   };
   return (
     <View style={styles.container}>

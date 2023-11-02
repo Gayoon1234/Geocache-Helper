@@ -5,7 +5,14 @@ import Variables from "../../components/multicache/Variables";
 import { useState } from "react";
 import Calculator from "../../components/multicache/Calculator";
 import Variable from "../models/SavedPuzzleModel";
+import SavedPuzzleModel from "../models/SavedPuzzleModel";
+import { useLocalSearchParams } from "expo-router";
+
 const TabOneScreen = () => {
+  const params = useLocalSearchParams();
+  const { puzzle } = params;
+  console.log(puzzle);
+
   const [variables, setVariables] = useState<Variable[]>([]);
 
   return (
