@@ -1,27 +1,25 @@
 import { ImageBackground, ScrollView, StyleSheet } from "react-native";
 import { Text, View } from "../../components/Themed";
 import Colors from "../../constants/Colors";
-import { FontAwesome } from "@expo/vector-icons";
 import SavedPuzzleCard from "../../components/saved/SavedPuzzleCard";
-import SavedPuzzleModel from "../../components/models/SavedPuzzleModel";
+import SavedPuzzleModel from "../models/SavedPuzzleModel";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useEffect, useState } from "react";
+import { useSaveData } from "../contexts/SaveDataContext";
 
 export default function TabTwoScreen() {
-  const DummyData: SavedPuzzleModel = {
-    title: "The Cache at the airport",
-    variables: { a: "1", b: "2", c: "3" },
-    coordinates: {
-      lat: {
-        direction: "S",
-        degrees: "37",
-        minutes: "342.A*B",
-      },
-      long: {
-        direction: "E",
-        degrees: "144",
-        minutes: "35. A+B",
-      },
-    },
-  };
+  const { saveData } = useSaveData();
+  // const [saveData, setSaveData] = useState<SavedPuzzleModel[] | null>(null);
+
+  // useEffect(() => {
+  //   const getData = async () => {
+  //     let saveData = await AsyncStorage.getItem("saved");
+  //     if (saveData) {
+  //       setSaveData(JSON.parse(saveData)["saved"]);
+  //     }
+  //   };
+  //   getData();
+  // }, []);
 
   return (
     <View style={styles.container}>
@@ -36,9 +34,15 @@ export default function TabTwoScreen() {
           </Text>
         </View>
         <ScrollView>
-          <SavedPuzzleCard savedPuzzle={DummyData} />
-          <SavedPuzzleCard savedPuzzle={DummyData} />
-          <SavedPuzzleCard savedPuzzle={DummyData} />
+          {saveData ? (
+            saveData.map((puzzle: SavedPuzzleModel) => {
+              return (
+                <SavedPuzzleCard savedPuzzle={puzzle} key={puzzle.title} />
+              );
+            })
+          ) : (
+            <Text>AAA</Text>
+          )}
         </ScrollView>
       </ImageBackground>
     </View>

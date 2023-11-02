@@ -7,11 +7,14 @@ import { FontAwesome } from "@expo/vector-icons";
 import { Clipboard } from "react-native";
 // import * as SecureStore from "expo-secure-store";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useSaveData } from "../../app/contexts/SaveDataContext";
 interface CalculatorProps {
   variables: { name: string; value: string }[];
 }
 
 const Calculator: React.FC<CalculatorProps> = ({ variables }) => {
+  const { saveData, setSaveData } = useSaveData();
+
   const [northSouthDirection, setNorthSouthDirection] = useState("S");
   const [northDegrees, setNorthDegrees] = useState("37");
   const [northMinutes, setNorthMinutes] = useState("");
@@ -23,6 +26,7 @@ const Calculator: React.FC<CalculatorProps> = ({ variables }) => {
 
   const copyToClipboard = () => {
     Clipboard.setString(finalCoordinate);
+    alert("The coordinates have been copied to the clipboard");
   };
 
   const handleCalc = () => {
@@ -97,7 +101,7 @@ const Calculator: React.FC<CalculatorProps> = ({ variables }) => {
   const save = async () => {
     let result = await AsyncStorage.getItem("saved");
     const newObject = {
-      title: "TestTitle-" + Date.now(),
+      title: "DateTime-" + Date.now(),
       variables: variables,
       coordinates: {
         lat: {
