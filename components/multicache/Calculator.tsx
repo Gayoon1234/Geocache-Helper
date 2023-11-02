@@ -5,7 +5,8 @@ import Colors from "../../constants/Colors";
 import { FontAwesome } from "@expo/vector-icons";
 // import Clipboard from "@react-native-clipboard/clipboard";
 import { Clipboard } from "react-native";
-import * as SecureStore from "expo-secure-store";
+// import * as SecureStore from "expo-secure-store";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 interface CalculatorProps {
   variables: { name: string; value: string }[];
 }
@@ -94,7 +95,7 @@ const Calculator: React.FC<CalculatorProps> = ({ variables }) => {
   };
 
   const save = async () => {
-    let result = await SecureStore.getItemAsync("saved");
+    let result = await AsyncStorage.getItem("saved");
     const newObject = {
       title: "TestTitle-" + Date.now(),
       variables: variables,
@@ -118,11 +119,11 @@ const Calculator: React.FC<CalculatorProps> = ({ variables }) => {
       const existingData = JSON.parse(result);
       existingData.saved.push(newObject);
       const updatedSaved = JSON.stringify(existingData);
-      await SecureStore.setItemAsync("saved", updatedSaved);
+      await AsyncStorage.setItem("saved", updatedSaved);
       //when local storage is empty
     } else {
       const newSaved = JSON.stringify({ saved: [newObject] });
-      await SecureStore.setItemAsync("saved", newSaved);
+      await AsyncStorage.setItem("saved", newSaved);
     }
     alert("Your thing was saved");
   };
