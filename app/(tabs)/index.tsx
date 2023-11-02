@@ -4,10 +4,9 @@ import Colors from "../../constants/Colors";
 import Variables from "../../components/multicache/Variables";
 import { useState } from "react";
 import Calculator from "../../components/multicache/Calculator";
-export default function TabOneScreen() {
-  const [variables, setVariables] = useState<{ name: string; value: string }[]>(
-    []
-  );
+import Variable from "../models/SavedPuzzleModel";
+const TabOneScreen = () => {
+  const [variables, setVariables] = useState<Variable[]>([]);
 
   return (
     <View style={styles.container}>
@@ -19,7 +18,7 @@ export default function TabOneScreen() {
       </View>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -39,3 +38,5 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
 });
+
+export default TabOneScreen;

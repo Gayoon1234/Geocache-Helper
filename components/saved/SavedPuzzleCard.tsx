@@ -4,17 +4,22 @@ import Colors from "../../constants/Colors";
 import { FontAwesome } from "@expo/vector-icons";
 import SavedPuzzleModel from "../../app/models/SavedPuzzleModel";
 import { useSaveData } from "../../app/contexts/SaveDataContext";
-
+import { useRouter } from "expo-router";
 interface CardProps {
   savedPuzzle: SavedPuzzleModel;
 }
 const SavedPuzzleCard: React.FC<CardProps> = ({ savedPuzzle }) => {
   const { saveData, setSaveData } = useSaveData();
+  const router = useRouter();
 
   const remove = () => {
     if (saveData) {
       setSaveData(saveData.filter((x) => x.title !== savedPuzzle.title));
     }
+  };
+
+  const edit = () => {
+    router.push("/(tabs)/");
   };
   return (
     <View style={styles.container}>
@@ -23,7 +28,9 @@ const SavedPuzzleCard: React.FC<CardProps> = ({ savedPuzzle }) => {
         <Pressable onPress={remove}>
           <FontAwesome name="trash" style={styles.icon} size={20} />
         </Pressable>
-        <FontAwesome name="edit" style={styles.icon} size={20} />
+        <Pressable onPress={edit}>
+          <FontAwesome name="edit" style={styles.icon} size={20} />
+        </Pressable>
       </View>
     </View>
   );

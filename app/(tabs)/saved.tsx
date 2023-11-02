@@ -34,14 +34,16 @@ export default function TabTwoScreen() {
           </Text>
         </View>
         <ScrollView>
-          {saveData ? (
+          {saveData && saveData?.length > 0 ? (
             saveData.map((puzzle: SavedPuzzleModel) => {
               return (
                 <SavedPuzzleCard savedPuzzle={puzzle} key={puzzle.title} />
               );
             })
           ) : (
-            <Text>AAA</Text>
+            <Text style={[styles.heading, { marginTop: 300 }]}>
+              You have nothing saved!
+            </Text>
           )}
         </ScrollView>
       </ImageBackground>

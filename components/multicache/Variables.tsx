@@ -16,9 +16,7 @@ import Variable from "../../app/models/SavedPuzzleModel";
 
 interface VariablesProps {
   variables: Variable[];
-  setVariables: React.Dispatch<
-    React.SetStateAction<{ name: string; value: string }[]>
-  >;
+  setVariables: React.Dispatch<React.SetStateAction<Variable[]>>;
 }
 
 const Variables: React.FC<VariablesProps> = ({ variables, setVariables }) => {
@@ -30,7 +28,7 @@ const Variables: React.FC<VariablesProps> = ({ variables, setVariables }) => {
     if (variableName && variableValue) {
       setVariables([
         ...variables,
-        { name: variableName, value: variableValue },
+        { name: variableName, value: variableValue } as Variable,
       ]);
       setVariableName("");
       setVariableValue("");
