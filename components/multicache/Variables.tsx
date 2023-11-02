@@ -211,7 +211,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontSize: 12,
     fontWeight: "bold",
-    color: Colors.theme.Cornsilk,
+    color: Colors.theme.EarthYellow,
   },
   top: {
     marginTop: 35,
