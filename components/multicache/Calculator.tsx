@@ -205,6 +205,7 @@ const Calculator: React.FC<CalculatorProps> = ({ variables }) => {
 const baseInputStyle = {
   paddingHorizontal: 4,
   fontSize: 24,
+  color: Colors.theme.Pakistan,
 };
 
 const styles = StyleSheet.create({

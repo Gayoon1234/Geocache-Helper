@@ -19,14 +19,16 @@ const Tag: React.FC<TagProps> = ({ name, value, remove }) => {
 
 const styles = StyleSheet.create({
   tag: {
-    backgroundColor: Colors.theme.DarkMoss,
+    backgroundColor: Colors.theme.EarthYellow,
     padding: 7,
     borderRadius: 20,
     alignSelf: "flex-start",
     margin: 5,
+    elevation: 10,
   },
   text: {
     fontSize: 18,
+    color: Colors.theme.Pakistan,
   },
 });
 export default Tag;

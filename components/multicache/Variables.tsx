@@ -7,6 +7,7 @@ import {
   Text,
   StyleSheet,
   Pressable,
+  ImageBackground,
 } from "react-native";
 import Tag from "../helper/tag";
 import Colors from "../../constants/Colors";
@@ -50,83 +51,98 @@ const Variables: React.FC<VariablesProps> = ({ variables, setVariables }) => {
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.heading}>Variables</Text>
-      {variables.length > 0 && (
-        <Text style={styles.subtitle}>
-          You can tap on the variable to delete it.
-        </Text>
-      )}
-      <Modal visible={isModalVisible} transparent={true} animationType="fade">
-        <View style={styles.modalContainer}>
-          <TextInput
-            style={styles.input}
-            placeholder="Name"
-            value={variableName}
-            onChangeText={(text) => setVariableName(text)}
-            placeholderTextColor={Colors.theme.Cornsilk}
-          />
-          <TextInput
-            style={styles.input}
-            placeholder="Value"
-            value={variableValue}
-            onChangeText={(text) => setVariableValue(text)}
-            placeholderTextColor={Colors.theme.Cornsilk}
-          />
-          <View style={styles.buttonContainer}>
-            <Pressable
-              onPress={addVariable}
-              style={[styles.fauxButton, { flex: 0.8 }]}
-            >
-              <FontAwesome
-                name="check"
-                style={{ textAlign: "center", color: Colors.theme.Pakistan }}
-                size={25}
-              />
-            </Pressable>
-            <Pressable
-              onPress={toggleModal}
-              style={[styles.fauxButton, { flex: 0.2 }]}
-            >
-              <FontAwesome
-                name="close"
-                style={{ textAlign: "center", color: Colors.theme.EarthYellow }}
-                size={25}
-              />
-            </Pressable>
-          </View>
+    <ImageBackground
+      source={require("../../assets/images/background1.jpg")}
+      style={styles.backgroundImage}
+    >
+      <View style={styles.container}>
+        <View style={styles.top}>
+          <Text style={styles.heading}>Variables</Text>
+          {variables.length > 0 && (
+            <Text style={styles.subtitle}>
+              You can tap on the variable to delete it.
+            </Text>
+          )}
         </View>
-      </Modal>
-      <View style={styles.variablesContainer}>
-        {variables.map((v, i) => (
-          <Tag name={v.name} value={v.value} remove={removeVariable} key={i} />
-        ))}
+        <Modal visible={isModalVisible} transparent={true} animationType="fade">
+          <View style={styles.modalContainer}>
+            <TextInput
+              style={styles.input}
+              placeholder="Name"
+              value={variableName}
+              onChangeText={(text) => setVariableName(text)}
+              placeholderTextColor={Colors.theme.Cornsilk}
+            />
+            <TextInput
+              style={styles.input}
+              placeholder="Value"
+              value={variableValue}
+              onChangeText={(text) => setVariableValue(text)}
+              placeholderTextColor={Colors.theme.Cornsilk}
+            />
+            <View style={styles.buttonContainer}>
+              <Pressable
+                onPress={addVariable}
+                style={[styles.fauxButton, { flex: 0.8 }]}
+              >
+                <FontAwesome
+                  name="check"
+                  style={{ textAlign: "center", color: Colors.theme.Pakistan }}
+                  size={25}
+                />
+              </Pressable>
+              <Pressable
+                onPress={toggleModal}
+                style={[styles.fauxButton, { flex: 0.2 }]}
+              >
+                <FontAwesome
+                  name="close"
+                  style={{
+                    textAlign: "center",
+                    color: Colors.theme.EarthYellow,
+                  }}
+                  size={25}
+                />
+              </Pressable>
+            </View>
+          </View>
+        </Modal>
+        <View style={styles.variablesContainer}>
+          {variables.map((v, i) => (
+            <Tag
+              name={v.name}
+              value={v.value}
+              remove={removeVariable}
+              key={i}
+            />
+          ))}
+        </View>
+        <View style={styles.AddClearContainer}>
+          <Pressable
+            onPress={toggleModal}
+            style={[styles.fauxButton, { flex: 0.8 }]}
+          >
+            <FontAwesome
+              name="plus"
+              style={{ textAlign: "center", color: Colors.theme.Pakistan }}
+              size={20}
+            />
+          </Pressable>
+          <Pressable
+            onPress={() => {
+              setVariables([]);
+            }}
+            style={[styles.fauxButton, { flex: 0.2 }]}
+          >
+            <FontAwesome
+              name="eraser"
+              style={{ textAlign: "center", color: Colors.theme.Pakistan }}
+              size={20}
+            />
+          </Pressable>
+        </View>
       </View>
-      <View style={styles.AddClearContainer}>
-        <Pressable
-          onPress={toggleModal}
-          style={[styles.fauxButton, { flex: 0.8 }]}
-        >
-          <FontAwesome
-            name="plus"
-            style={{ textAlign: "center", color: Colors.theme.Pakistan }}
-            size={20}
-          />
-        </Pressable>
-        <Pressable
-          onPress={() => {
-            setVariables([]);
-          }}
-          style={[styles.fauxButton, { flex: 0.2 }]}
-        >
-          <FontAwesome
-            name="eraser"
-            style={{ textAlign: "center", color: Colors.theme.Pakistan }}
-            size={20}
-          />
-        </Pressable>
-      </View>
-    </View>
+    </ImageBackground>
   );
 };
 
@@ -134,6 +150,16 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 16,
+    paddingTop: 1,
+    backgroundColor: "rgba(0, 0, 0, 0.0)",
+  },
+  backgroundImage: {
+    flex: 1,
+    resizeMode: "cover",
+    borderRadius: 20,
+    overflow: "hidden",
+    borderWidth: 2,
+    borderColor: Colors.theme.Pakistan,
   },
   modalContainer: {
     flex: 1,
@@ -178,12 +204,19 @@ const styles = StyleSheet.create({
   heading: {
     textAlign: "center",
     fontSize: 24,
-    color: Colors.theme.TigersEye,
+    color: Colors.theme.Cornsilk,
+    fontWeight: "bold",
   },
   subtitle: {
     textAlign: "center",
     fontSize: 12,
-    color: Colors.theme.TigersEye,
+    fontWeight: "bold",
+    color: Colors.theme.Cornsilk,
+  },
+  top: {
+    marginTop: 35,
+    borderRadius: 20,
+    padding: 2,
   },
   variableText: {
     fontSize: 16,
@@ -192,6 +225,3 @@ const styles = StyleSheet.create({
 });
 
 export default Variables;
-function v(value: Variable, index: number, array: Variable[]): unknown {
-  throw new Error("Function not implemented.");
-}
