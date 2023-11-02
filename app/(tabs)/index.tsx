@@ -28,7 +28,6 @@ const styles = StyleSheet.create({
   },
   variableContainer: {
     height: "30%",
-    // backgroundColor: "rgba(0, 0, 0, 0.0)",
     backgroundColor: Colors.theme.EarthYellow,
   },
   coordinateContainter: {

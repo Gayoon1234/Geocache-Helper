@@ -217,6 +217,9 @@ const styles = StyleSheet.create({
     marginTop: 35,
     borderRadius: 20,
     padding: 2,
+    width: 340,
+    backgroundColor: "rgba(0, 0, 0, 0.3)",
+    alignSelf: "center",
   },
   variableText: {
     fontSize: 16,

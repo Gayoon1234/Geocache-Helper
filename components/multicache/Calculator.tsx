@@ -36,7 +36,6 @@ const Calculator: React.FC<CalculatorProps> = ({ variables }) => {
         minutes: eastMinutes,
       },
     };
-    // console.log(coordinate);
 
     variables.forEach((v) => {
       const { name, value } = v;
@@ -63,8 +62,6 @@ const Calculator: React.FC<CalculatorProps> = ({ variables }) => {
       );
     });
 
-    // console.log(coordinate);
-
     const evaluatedCoordinate = {
       lat: {
         direction: coordinate.lat.direction,
@@ -87,13 +84,11 @@ const Calculator: React.FC<CalculatorProps> = ({ variables }) => {
         return expression;
       }
     }
-    // console.log(evaluatedCoordinate);
     const latString = `${evaluatedCoordinate.lat.direction} ${evaluatedCoordinate.lat.degrees} ${evaluatedCoordinate.lat.minutes}`;
     const longString = `${evaluatedCoordinate.long.direction} ${evaluatedCoordinate.long.degrees} ${evaluatedCoordinate.long.minutes}`;
 
     const formattedString = `${latString} ${longString}`;
 
-    // console.log(formattedString);
     setFinalCoordinate(formattedString);
   };
 
