@@ -42,7 +42,7 @@ const SavedPuzzleCard: React.FC<CardProps> = ({ savedPuzzle }) => {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: Colors.theme.DarkMoss,
-    width: 360,
+    width: 400,
     marginTop: 10,
     margin: 2,
     alignSelf: "center",

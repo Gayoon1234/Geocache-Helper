@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Text } from "../Themed";
 import { Pressable, StyleSheet, TextInput, View } from "react-native";
 import Colors from "../../constants/Colors";
@@ -10,11 +10,19 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useSaveData } from "../../app/contexts/SaveDataContext";
 import SavedPuzzleModel from "../../app/models/SavedPuzzleModel";
 import Variable from "../../app/models/SavedPuzzleModel";
+import { LinearGradient } from "expo-linear-gradient";
 interface CalculatorProps {
   variables: Variable[];
+  savedPuzzle: SavedPuzzleModel | null;
 }
 
-const Calculator: React.FC<CalculatorProps> = ({ variables }) => {
+// Note:
+// There is a variables field in savedPuzzle, however that is
+// not in sync with the latest updates, instead it is the saved state.
+const Calculator: React.FC<CalculatorProps> = ({ variables, savedPuzzle }) => {
+  // console.log("EEE");
+  // console.log(savedPuzzle);
+  // console.log(variables);
   const { saveData, setSaveData } = useSaveData();
 
   const [northSouthDirection, setNorthSouthDirection] = useState("S");
@@ -25,6 +33,18 @@ const Calculator: React.FC<CalculatorProps> = ({ variables }) => {
   const [eastDegrees, setEastDegrees] = useState("144");
   const [eastMinutes, setEastMinutes] = useState("");
   const [finalCoordinate, setFinalCoordinate] = useState("");
+
+  useEffect(() => {
+    if (savedPuzzle) {
+      setNorthSouthDirection(savedPuzzle.coordinates.lat.direction);
+      setNorthDegrees(savedPuzzle.coordinates.lat.degrees);
+      setNorthMinutes(savedPuzzle.coordinates.lat.minutes);
+
+      setEastWestDirection(savedPuzzle.coordinates.long.direction);
+      setEastDegrees(savedPuzzle.coordinates.long.degrees);
+      setEastMinutes(savedPuzzle.coordinates.long.minutes);
+    }
+  }, [savedPuzzle]);
 
   const copyToClipboard = () => {
     Clipboard.setString(finalCoordinate);
@@ -133,6 +153,11 @@ const Calculator: React.FC<CalculatorProps> = ({ variables }) => {
 
   return (
     <>
+      <LinearGradient
+        // Background Linear Gradient
+        colors={[Colors.theme.EarthYellow, Colors.theme.TigersEye]}
+        style={styles.background}
+      />
       <Text style={styles.heading}>Calculator</Text>
       <View style={styles.container}>
         <View style={styles.row}>
@@ -284,6 +309,13 @@ const styles = StyleSheet.create({
     paddingVertical: 20,
     margin: 2,
     borderRadius: 10,
+  },
+  background: {
+    position: "absolute",
+    left: 0,
+    right: 0,
+    top: 0,
+    height: 600,
   },
 });
 

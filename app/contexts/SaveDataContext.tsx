@@ -12,6 +12,7 @@ import SavedPuzzleModel from "../models/SavedPuzzleModel";
 interface SaveDataContextType {
   saveData: SavedPuzzleModel[] | null;
   setSaveData: (data: SavedPuzzleModel[] | null) => void;
+  getSaveDataByTitle: (title: string) => SavedPuzzleModel | null;
 }
 
 const SaveDataContext = createContext<SaveDataContextType | undefined>(
@@ -46,8 +47,17 @@ export function SaveDataProvider({
     }
   }, [saveData]);
 
+  const getSaveDataByTitle = (title: string) => {
+    if (!saveData) {
+      return null;
+    }
+    const foundPuzzle = saveData.find((puzzle) => puzzle.title === title);
+    return foundPuzzle || null;
+  };
   return (
-    <SaveDataContext.Provider value={{ saveData, setSaveData }}>
+    <SaveDataContext.Provider
+      value={{ saveData, setSaveData, getSaveDataByTitle }}
+    >
       {children}
     </SaveDataContext.Provider>
   );

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Button,
   Modal,
@@ -23,6 +23,8 @@ const Variables: React.FC<VariablesProps> = ({ variables, setVariables }) => {
   const [isModalVisible, setModalVisible] = useState(false);
   const [variableName, setVariableName] = useState("");
   const [variableValue, setVariableValue] = useState("");
+
+  // console.log(variables);
 
   const addVariable = () => {
     if (variableName && variableValue) {
@@ -153,8 +155,6 @@ const styles = StyleSheet.create({
     resizeMode: "cover",
     borderRadius: 20,
     overflow: "hidden",
-    borderWidth: 2,
-    borderColor: Colors.theme.Pakistan,
   },
   modalContainer: {
     flex: 1,
