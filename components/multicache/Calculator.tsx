@@ -34,6 +34,8 @@ const Calculator: React.FC<CalculatorProps> = ({ variables, savedPuzzle }) => {
   const [eastMinutes, setEastMinutes] = useState("");
   const [finalCoordinate, setFinalCoordinate] = useState("");
 
+  const [title, setTitle] = useState("");
+
   useEffect(() => {
     if (savedPuzzle) {
       setNorthSouthDirection(savedPuzzle.coordinates.lat.direction);
@@ -43,6 +45,9 @@ const Calculator: React.FC<CalculatorProps> = ({ variables, savedPuzzle }) => {
       setEastWestDirection(savedPuzzle.coordinates.long.direction);
       setEastDegrees(savedPuzzle.coordinates.long.degrees);
       setEastMinutes(savedPuzzle.coordinates.long.minutes);
+
+      setTitle(savedPuzzle.title);
+      setFinalCoordinate("");
     }
   }, [savedPuzzle]);
 
@@ -123,7 +128,7 @@ const Calculator: React.FC<CalculatorProps> = ({ variables, savedPuzzle }) => {
   const save = async () => {
     // let result = await AsyncStorage.getItem("saved");
     const newObject: SavedPuzzleModel = {
-      title: "DateTime-" + Date.now(),
+      title: title ? title : "DateTime-" + Date.now(),
       variables: variables,
       coordinates: {
         lat: {
@@ -149,6 +154,18 @@ const Calculator: React.FC<CalculatorProps> = ({ variables, savedPuzzle }) => {
       setSaveData([newObject as SavedPuzzleModel]);
     }
     alert("Your thing was saved");
+  };
+
+  const clear = () => {
+    setNorthSouthDirection("S");
+    setNorthDegrees("37");
+    setNorthMinutes("");
+
+    setEastWestDirection("E");
+    setEastDegrees("144");
+    setEastMinutes("");
+
+    setTitle("");
   };
 
   return (
@@ -216,6 +233,56 @@ const Calculator: React.FC<CalculatorProps> = ({ variables, savedPuzzle }) => {
           </Pressable>
           <Pressable
             onPress={() => {
+              clear();
+            }}
+            style={[styles.fauxButton, { flex: 0.2 }]}
+          >
+            <FontAwesome
+              name="eraser"
+              style={{ textAlign: "center", color: Colors.theme.TigersEye }}
+              size={20}
+            />
+          </Pressable>
+        </View>
+        <View
+          style={{
+            borderColor: Colors.theme.Pakistan,
+            borderWidth: 2,
+            borderRadius: 10,
+            borderStyle: "dashed",
+            width: "80%",
+            alignSelf: "center",
+            marginTop: 20,
+            paddingBottom: 10,
+          }}
+        >
+          <Text style={[styles.heading, { paddingTop: 30 }]}>Result</Text>
+          {/* {finalCoordinate && ( */}
+          <Text style={[styles.heading, { paddingTop: 10 }]}>
+            {finalCoordinate}
+          </Text>
+          {/* )} */}
+
+          <Pressable
+            onPress={copyToClipboard}
+            style={[styles.fauxButton, { width: "20%", alignSelf: "center" }]}
+          >
+            <FontAwesome
+              name="copy"
+              style={{ textAlign: "center", color: Colors.theme.TigersEye }}
+              size={20}
+            />
+          </Pressable>
+        </View>
+        <View style={[styles.CalcSaveContainer, { marginTop: 20 }]}>
+          <TextInput
+            style={{ fontSize: 20, flex: 1, color: Colors.theme.Pakistan }}
+            placeholder="Title"
+            value={title}
+            onChangeText={setTitle}
+          />
+          <Pressable
+            onPress={() => {
               save();
             }}
             style={[styles.fauxButton, { flex: 0.2 }]}
@@ -227,35 +294,6 @@ const Calculator: React.FC<CalculatorProps> = ({ variables, savedPuzzle }) => {
             />
           </Pressable>
         </View>
-        {finalCoordinate && (
-          <View
-            style={{
-              borderColor: Colors.theme.Pakistan,
-              borderWidth: 2,
-              borderRadius: 10,
-              borderStyle: "dashed",
-              width: "80%",
-              alignSelf: "center",
-              marginTop: 20,
-              paddingBottom: 10,
-            }}
-          >
-            <Text style={[styles.heading, { paddingTop: 30 }]}>Result</Text>
-            <Text style={[styles.heading, { paddingTop: 10 }]}>
-              {finalCoordinate}
-            </Text>
-            <Pressable
-              onPress={copyToClipboard}
-              style={[styles.fauxButton, { width: "20%", alignSelf: "center" }]}
-            >
-              <FontAwesome
-                name="copy"
-                style={{ textAlign: "center", color: Colors.theme.TigersEye }}
-                size={20}
-              />
-            </Pressable>
-          </View>
-        )}
       </View>
     </>
   );

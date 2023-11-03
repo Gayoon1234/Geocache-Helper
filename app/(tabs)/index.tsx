@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { ScrollView, StyleSheet } from "react-native";
 import { View } from "../../components/Themed";
 import Colors from "../../constants/Colors";
 import Variables from "../../components/multicache/Variables";
@@ -38,9 +38,12 @@ const TabOneScreen = () => {
       <View style={styles.variableContainer}>
         <Variables variables={variables} setVariables={setVariables} />
       </View>
-      <View style={styles.coordinateContainter}>
+      <ScrollView
+        style={styles.coordinateContainter}
+        contentContainerStyle={{ flexGrow: 1 }}
+      >
         <Calculator variables={variables} savedPuzzle={savedPuzzle} />
-      </View>
+      </ScrollView>
     </View>
   );
 };
@@ -49,13 +52,16 @@ const styles = StyleSheet.create({
   container: {
     display: "flex",
     flexDirection: "column",
+    flex: 1,
   },
   variableContainer: {
-    height: "30%",
+    // height: "30%",
+    flex: 0.4,
     backgroundColor: Colors.theme.EarthYellow,
   },
   coordinateContainter: {
-    height: "70%",
+    // height: "100%",
+    flex: 1.6,
     backgroundColor: Colors.theme.EarthYellow,
   },
   title: {
