@@ -274,7 +274,7 @@ const Calculator: React.FC<CalculatorProps> = ({ variables, savedPuzzle }) => {
             />
           </Pressable>
         </View>
-        <View style={[styles.CalcSaveContainer, { marginTop: 20 }]}>
+        <View style={[styles.CalcSaveContainer, { marginTop: 40 }]}>
           <TextInput
             style={{ fontSize: 20, flex: 1, color: Colors.theme.Pakistan }}
             placeholder="Title"

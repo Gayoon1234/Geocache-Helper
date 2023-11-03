@@ -55,13 +55,13 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   variableContainer: {
-    // height: "30%",
-    flex: 0.4,
+    height: "30%",
+    // flex: 0.4,
     backgroundColor: Colors.theme.EarthYellow,
   },
   coordinateContainter: {
     // height: "100%",
-    flex: 1.6,
+    flex: 1,
     backgroundColor: Colors.theme.EarthYellow,
   },
   title: {
