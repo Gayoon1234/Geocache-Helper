@@ -34,17 +34,17 @@ const TabOneScreen = () => {
   }, [puzzle]);
 
   return (
-    <View style={styles.container}>
+    <ScrollView
+      style={styles.container}
+      contentContainerStyle={{ flexGrow: 1 }}
+    >
       <View style={styles.variableContainer}>
         <Variables variables={variables} setVariables={setVariables} />
       </View>
-      <ScrollView
-        style={styles.coordinateContainter}
-        contentContainerStyle={{ flexGrow: 1 }}
-      >
+      <View style={styles.coordinateContainter}>
         <Calculator variables={variables} savedPuzzle={savedPuzzle} />
-      </ScrollView>
-    </View>
+      </View>
+    </ScrollView>
   );
 };
 
