@@ -29,10 +29,10 @@ const SavedPuzzleCard: React.FC<CardProps> = ({ savedPuzzle }) => {
       <Text style={styles.text}>{savedPuzzle.title}</Text>
       <View style={styles.iconBox}>
         <Pressable onPress={remove}>
-          <FontAwesome name="trash" style={styles.icon} size={20} />
+          <FontAwesome name="trash" style={styles.icon} size={40} />
         </Pressable>
         <Pressable onPress={edit}>
-          <FontAwesome name="edit" style={styles.icon} size={20} />
+          <FontAwesome name="edit" style={styles.icon} size={40} />
         </Pressable>
       </View>
     </View>
@@ -42,12 +42,13 @@ const SavedPuzzleCard: React.FC<CardProps> = ({ savedPuzzle }) => {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: Colors.theme.DarkMoss,
+    opacity: 0.9,
     width: 400,
     marginTop: 10,
     margin: 2,
     alignSelf: "center",
     borderRadius: 20,
-    padding: 10,
+    padding: 20,
     display: "flex",
     flexDirection: "row",
     justifyContent: "space-between",
@@ -55,7 +56,7 @@ const styles = StyleSheet.create({
   },
   iconBox: {
     flexDirection: "row",
-    gap: 15,
+    gap: 20,
     backgroundColor: Colors.theme.DarkMoss,
   },
   text: {
@@ -64,7 +65,7 @@ const styles = StyleSheet.create({
   },
   icon: {
     color: Colors.theme.EarthYellow,
-    fontSize: 20,
+    fontSize: 30,
   },
 });
 

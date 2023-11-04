@@ -148,7 +148,12 @@ const Calculator: React.FC<CalculatorProps> = ({ variables, savedPuzzle }) => {
 
     //when local storage is not empty
     if (saveData) {
-      setSaveData([...saveData, newObject as SavedPuzzleModel]);
+      // It will try to remove any pre-existing puzzle with that name.
+      //then it appends the new puzzle to the saved list
+      setSaveData([
+        ...saveData.filter((x) => x.title !== newObject.title),
+        newObject as SavedPuzzleModel,
+      ]);
       //when local storage is empty
     } else {
       setSaveData([newObject as SavedPuzzleModel]);
@@ -269,9 +274,14 @@ const Calculator: React.FC<CalculatorProps> = ({ variables, savedPuzzle }) => {
             />
           </Pressable>
         </View>
-        <View style={[styles.CalcSaveContainer, { marginTop: 40 }]}>
+        <View
+          style={[
+            styles.CalcSaveContainer,
+            { marginTop: 40, paddingBottom: 200 },
+          ]}
+        >
           <TextInput
-            style={{ fontSize: 20, flex: 1, color: Colors.theme.Pakistan }}
+            style={styles.titleInput}
             placeholder="Title"
             value={title}
             onChangeText={setTitle}
@@ -295,9 +305,12 @@ const Calculator: React.FC<CalculatorProps> = ({ variables, savedPuzzle }) => {
 };
 
 const baseInputStyle = {
-  paddingHorizontal: 4,
+  padding: 4,
   fontSize: 24,
   color: Colors.theme.Pakistan,
+  backgroundColor: Colors.theme.EarthYellow,
+  marginHorizontal: 3,
+  borderRadius: 10,
 };
 
 const styles = StyleSheet.create({
@@ -341,6 +354,15 @@ const styles = StyleSheet.create({
     padding: 10,
     paddingVertical: 20,
     margin: 2,
+    borderRadius: 10,
+  },
+  titleInput: {
+    fontSize: 24,
+    flex: 1,
+    color: Colors.theme.Pakistan,
+    backgroundColor: Colors.theme.EarthYellow,
+    marginRight: 5,
+    paddingLeft: 5,
     borderRadius: 10,
   },
 });

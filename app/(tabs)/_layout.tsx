@@ -31,9 +31,7 @@ export default function TabLayout() {
         name="index"
         options={{
           title: "Multi Cache Helper",
-          tabBarIcon: ({ color }) => (
-            <TabBarIcon name="bicycle" color={color} />
-          ),
+          tabBarIcon: ({ color }) => <TabBarIcon name="map" color={color} />,
           headerShown: false,
         }}
       />
