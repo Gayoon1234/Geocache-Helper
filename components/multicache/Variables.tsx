@@ -187,6 +187,7 @@ const styles = StyleSheet.create({
   fauxButton: {
     backgroundColor: Colors.theme.TigersEye,
     padding: 10,
+    paddingVertical: 20,
     margin: 2,
     borderRadius: 10,
   },

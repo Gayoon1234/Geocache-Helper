@@ -57,7 +57,7 @@ const styles = StyleSheet.create({
   iconBox: {
     flexDirection: "row",
     gap: 20,
-    backgroundColor: Colors.theme.DarkMoss,
+    backgroundColor: "transparent",
   },
   text: {
     color: Colors.theme.EarthYellow,

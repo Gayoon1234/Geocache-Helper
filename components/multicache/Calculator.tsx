@@ -158,7 +158,7 @@ const Calculator: React.FC<CalculatorProps> = ({ variables, savedPuzzle }) => {
     } else {
       setSaveData([newObject as SavedPuzzleModel]);
     }
-    alert("Your thing was saved");
+    alert(`Your puzzle was saved as ${title}`);
   };
 
   const clear = () => {
@@ -265,7 +265,7 @@ const Calculator: React.FC<CalculatorProps> = ({ variables, savedPuzzle }) => {
 
           <Pressable
             onPress={copyToClipboard}
-            style={[styles.fauxButton, { width: "20%", alignSelf: "center" }]}
+            style={[styles.fauxButton, { width: "80%", alignSelf: "center" }]}
           >
             <FontAwesome
               name="copy"
