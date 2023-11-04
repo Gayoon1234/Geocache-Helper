@@ -170,11 +170,6 @@ const Calculator: React.FC<CalculatorProps> = ({ variables, savedPuzzle }) => {
 
   return (
     <>
-      <LinearGradient
-        // Background Linear Gradient
-        colors={[Colors.theme.EarthYellow, Colors.theme.TigersEye]}
-        style={styles.background}
-      />
       <Text style={styles.heading}>Calculator</Text>
       <View style={styles.container}>
         <View style={styles.row}>
@@ -347,13 +342,6 @@ const styles = StyleSheet.create({
     paddingVertical: 20,
     margin: 2,
     borderRadius: 10,
-  },
-  background: {
-    position: "absolute",
-    left: 0,
-    right: 0,
-    top: 0,
-    height: 600,
   },
 });
 

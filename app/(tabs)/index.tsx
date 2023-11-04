@@ -8,6 +8,7 @@ import Variable from "../models/SavedPuzzleModel";
 import { useLocalSearchParams } from "expo-router";
 import { useSaveData } from "../contexts/SaveDataContext";
 import SavedPuzzleModel from "../models/SavedPuzzleModel";
+import { LinearGradient } from "expo-linear-gradient";
 
 const TabOneScreen = () => {
   const params = useLocalSearchParams();
@@ -38,6 +39,11 @@ const TabOneScreen = () => {
       style={styles.container}
       contentContainerStyle={{ flexGrow: 1 }}
     >
+      <LinearGradient
+        // Background Linear Gradient
+        colors={[Colors.theme.EarthYellow, Colors.theme.TigersEye]}
+        style={styles.background}
+      />
       <View style={styles.variableContainer}>
         <Variables variables={variables} setVariables={setVariables} />
       </View>
@@ -56,17 +62,23 @@ const styles = StyleSheet.create({
   },
   variableContainer: {
     height: "30%",
-    // flex: 0.4,
-    backgroundColor: Colors.theme.EarthYellow,
+    backgroundColor: "rgba(0, 0, 0, 0.0)",
   },
   coordinateContainter: {
-    // height: "100%",
     flex: 1,
-    backgroundColor: Colors.theme.EarthYellow,
+    backgroundColor: "rgba(0, 0, 0, 0.0)",
   },
   title: {
     fontSize: 20,
     fontWeight: "bold",
+  },
+  background: {
+    position: "absolute",
+    left: 0,
+    right: 0,
+    top: 0,
+    height: "100%",
+    // height: 600,
   },
 });
 
