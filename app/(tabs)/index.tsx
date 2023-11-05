@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   variableContainer: {
-    height: "30%",
+    height: 300,
     backgroundColor: "rgba(0, 0, 0, 0.0)",
   },
   coordinateContainter: {

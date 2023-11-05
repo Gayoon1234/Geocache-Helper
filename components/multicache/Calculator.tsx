@@ -20,9 +20,6 @@ interface CalculatorProps {
 // There is a variables field in savedPuzzle, however that is
 // not in sync with the latest updates, instead it is the saved state.
 const Calculator: React.FC<CalculatorProps> = ({ variables, savedPuzzle }) => {
-  // console.log("EEE");
-  // console.log(savedPuzzle);
-  // console.log(variables);
   const { saveData, setSaveData } = useSaveData();
 
   const [northSouthDirection, setNorthSouthDirection] = useState("S");
@@ -35,6 +32,7 @@ const Calculator: React.FC<CalculatorProps> = ({ variables, savedPuzzle }) => {
   const [finalCoordinate, setFinalCoordinate] = useState("");
 
   const [title, setTitle] = useState("");
+  const [notes, setNotes] = useState("");
 
   useEffect(() => {
     if (savedPuzzle) {
@@ -47,6 +45,7 @@ const Calculator: React.FC<CalculatorProps> = ({ variables, savedPuzzle }) => {
       setEastMinutes(savedPuzzle.coordinates.long.minutes);
 
       setTitle(savedPuzzle.title);
+      setNotes(savedPuzzle.notes);
       setFinalCoordinate("");
     }
   }, [savedPuzzle]);
@@ -142,6 +141,7 @@ const Calculator: React.FC<CalculatorProps> = ({ variables, savedPuzzle }) => {
           minutes: eastMinutes,
         },
       },
+      notes: notes,
       name: "",
       value: "",
     };
@@ -274,6 +274,18 @@ const Calculator: React.FC<CalculatorProps> = ({ variables, savedPuzzle }) => {
             />
           </Pressable>
         </View>
+        <Text style={[styles.heading, { paddingTop: 30 }]}>Notes</Text>
+        <TextInput
+          style={[
+            styles.input,
+            { fontSize: 18, width: "80%", alignSelf: "center" },
+          ]}
+          multiline
+          numberOfLines={3}
+          placeholder="Enter some notes about the cache"
+          value={notes}
+          onChangeText={setNotes}
+        ></TextInput>
         <View
           style={[
             styles.CalcSaveContainer,

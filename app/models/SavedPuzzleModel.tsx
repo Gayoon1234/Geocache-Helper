@@ -9,4 +9,5 @@ export default interface SavedPuzzleModel {
     lat: { direction: string; degrees: string; minutes: string };
     long: { direction: string; degrees: string; minutes: string };
   };
+  notes: string;
 }
