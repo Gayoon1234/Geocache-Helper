@@ -126,7 +126,7 @@ const Calculator: React.FC<CalculatorProps> = ({ variables, savedPuzzle }) => {
 
   const save = async () => {
     // let result = await AsyncStorage.getItem("saved");
-    const newObject: SavedPuzzleModel = {
+    const newObject = {
       title: title ? title : "DateTime-" + Date.now(),
       variables: variables,
       coordinates: {
@@ -142,8 +142,6 @@ const Calculator: React.FC<CalculatorProps> = ({ variables, savedPuzzle }) => {
         },
       },
       notes: notes,
-      name: "",
-      value: "",
     };
 
     //when local storage is not empty
@@ -256,9 +254,11 @@ const Calculator: React.FC<CalculatorProps> = ({ variables, savedPuzzle }) => {
             paddingBottom: 10,
           }}
         >
-          <Text style={[styles.heading, { paddingTop: 30 }]}>Result</Text>
+          <Text style={[styles.heading, { paddingTop: 30, fontSize: 20 }]}>
+            Result
+          </Text>
           {/* {finalCoordinate && ( */}
-          <Text style={[styles.heading, { paddingTop: 10 }]}>
+          <Text style={[styles.heading, { paddingTop: 5, fontSize: 18 }]}>
             {finalCoordinate}
           </Text>
           {/* )} */}
@@ -281,17 +281,14 @@ const Calculator: React.FC<CalculatorProps> = ({ variables, savedPuzzle }) => {
             { fontSize: 18, width: "80%", alignSelf: "center" },
           ]}
           multiline
-          numberOfLines={3}
+          numberOfLines={4}
           placeholder="Enter some notes about the cache"
           value={notes}
           onChangeText={setNotes}
+          textAlignVertical="top"
         ></TextInput>
-        <View
-          style={[
-            styles.CalcSaveContainer,
-            { marginTop: 40, paddingBottom: 200 },
-          ]}
-        >
+        <Text style={[styles.heading, { paddingTop: 30 }]}>Save As</Text>
+        <View style={[styles.CalcSaveContainer, { paddingBottom: 200 }]}>
           <TextInput
             style={styles.titleInput}
             placeholder="Title"
