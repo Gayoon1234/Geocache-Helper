@@ -39,10 +39,7 @@ const TabOneScreen = () => {
       style={styles.container}
       contentContainerStyle={{ flexGrow: 1 }}
     >
-      <StatusBar
-        barStyle="light-content"
-        backgroundColor={Colors.theme.Pakistan}
-      />
+      <StatusBar barStyle="light-content" />
 
       <LinearGradient
         // Background Linear Gradient
