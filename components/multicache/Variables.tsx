@@ -172,7 +172,8 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.theme.DarkMoss,
     fontSize: 20,
     borderRadius: 8,
-    padding: 5,
+    padding: 6,
+    paddingVertical: 20,
   },
   buttonContainer: {
     flexDirection: "row",
