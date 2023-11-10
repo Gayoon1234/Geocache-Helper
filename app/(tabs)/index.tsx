@@ -1,4 +1,4 @@
-import { ScrollView, StyleSheet } from "react-native";
+import { ScrollView, StatusBar, StyleSheet } from "react-native";
 import { View } from "../../components/Themed";
 import Colors from "../../constants/Colors";
 import Variables from "../../components/multicache/Variables";
@@ -39,6 +39,8 @@ const TabOneScreen = () => {
       style={styles.container}
       contentContainerStyle={{ flexGrow: 1 }}
     >
+      <StatusBar barStyle="light-content" />
+
       <LinearGradient
         // Background Linear Gradient
         colors={[Colors.theme.EarthYellow, Colors.theme.TigersEye]}

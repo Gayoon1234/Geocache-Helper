@@ -314,12 +314,14 @@ const Calculator: React.FC<CalculatorProps> = ({ variables, savedPuzzle }) => {
 };
 
 const baseInputStyle = {
-  padding: 4,
+  padding: 6,
   fontSize: 24,
   color: Colors.theme.Pakistan,
   backgroundColor: Colors.theme.EarthYellow,
   marginHorizontal: 3,
   borderRadius: 10,
+  paddingTop: 10,
+  paddingBottom: 10,
 };
 
 const styles = StyleSheet.create({

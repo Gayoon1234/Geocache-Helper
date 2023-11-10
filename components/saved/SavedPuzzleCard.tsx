@@ -56,16 +56,16 @@ const styles = StyleSheet.create({
   },
   iconBox: {
     flexDirection: "row",
-    gap: 20,
+    gap: 25,
     backgroundColor: "transparent",
   },
   text: {
     color: Colors.theme.EarthYellow,
-    fontSize: 18,
+    fontSize: 22,
   },
   icon: {
     color: Colors.theme.EarthYellow,
-    fontSize: 30,
+    fontSize: 35,
   },
 });
 

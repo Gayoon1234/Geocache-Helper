@@ -153,7 +153,8 @@ const styles = StyleSheet.create({
   backgroundImage: {
     flex: 1,
     resizeMode: "cover",
-    borderRadius: 20,
+    borderBottomRightRadius: 20,
+    borderBottomLeftRadius: 20,
     overflow: "hidden",
   },
   modalContainer: {
@@ -172,7 +173,8 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.theme.DarkMoss,
     fontSize: 20,
     borderRadius: 8,
-    padding: 5,
+    padding: 6,
+    paddingVertical: 20,
   },
   buttonContainer: {
     flexDirection: "row",
