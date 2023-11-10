@@ -153,7 +153,8 @@ const styles = StyleSheet.create({
   backgroundImage: {
     flex: 1,
     resizeMode: "cover",
-    borderRadius: 20,
+    borderBottomRightRadius: 20,
+    borderBottomLeftRadius: 20,
     overflow: "hidden",
   },
   modalContainer: {
