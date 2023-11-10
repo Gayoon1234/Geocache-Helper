@@ -3,23 +3,10 @@ import { Text, View } from "../../components/Themed";
 import Colors from "../../constants/Colors";
 import SavedPuzzleCard from "../../components/saved/SavedPuzzleCard";
 import SavedPuzzleModel from "../models/SavedPuzzleModel";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import { useEffect, useState } from "react";
 import { useSaveData } from "../contexts/SaveDataContext";
 
 export default function TabTwoScreen() {
   const { saveData } = useSaveData();
-  // const [saveData, setSaveData] = useState<SavedPuzzleModel[] | null>(null);
-
-  // useEffect(() => {
-  //   const getData = async () => {
-  //     let saveData = await AsyncStorage.getItem("saved");
-  //     if (saveData) {
-  //       setSaveData(JSON.parse(saveData)["saved"]);
-  //     }
-  //   };
-  //   getData();
-  // }, []);
 
   return (
     <View style={styles.container}>
