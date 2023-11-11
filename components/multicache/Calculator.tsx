@@ -35,6 +35,7 @@ const Calculator: React.FC<CalculatorProps> = ({ variables, savedPuzzle }) => {
   const [title, setTitle] = useState("");
   const [notes, setNotes] = useState("");
   const [visible, setVisible] = useState(false);
+  const [modalText, setModalText] = useState("");
 
   useEffect(() => {
     if (savedPuzzle) {
@@ -58,8 +59,8 @@ const Calculator: React.FC<CalculatorProps> = ({ variables, savedPuzzle }) => {
 
   const copyToClipboard = () => {
     Clipboard.setString(finalCoordinate);
-    // alert("The coordinates have been copied to the clipboard");
     setVisible(true);
+    setModalText("The coordinates have been copied to the clipboard");
   };
 
   const handleCalc = () => {
@@ -164,7 +165,8 @@ const Calculator: React.FC<CalculatorProps> = ({ variables, savedPuzzle }) => {
     } else {
       setSaveData([newObject as SavedPuzzleModel]);
     }
-    alert(`Your puzzle was saved as ${title}`);
+    setModalText(`Your puzzle was saved as ${title}`);
+    setVisible(true);
   };
 
   const clear = () => {
@@ -181,11 +183,7 @@ const Calculator: React.FC<CalculatorProps> = ({ variables, savedPuzzle }) => {
 
   return (
     <>
-      <CustomModal
-        text="The coordinates have been copied to the clipboard"
-        visible={visible}
-        setVisible={setVisible}
-      />
+      <CustomModal text={modalText} visible={visible} setVisible={setVisible} />
       <Text style={styles.heading}>Calculator</Text>
       <View style={styles.container}>
         <View style={styles.row}>
