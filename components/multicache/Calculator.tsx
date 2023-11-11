@@ -35,7 +35,6 @@ const Calculator: React.FC<CalculatorProps> = ({ variables, savedPuzzle }) => {
   const [notes, setNotes] = useState("");
 
   useEffect(() => {
-    // const setPuzzle = async () => {
     if (savedPuzzle) {
       setNorthMinutes(savedPuzzle.coordinates.lat.minutes);
       setNorthSouthDirection(savedPuzzle.coordinates.lat.direction);
@@ -73,8 +72,6 @@ const Calculator: React.FC<CalculatorProps> = ({ variables, savedPuzzle }) => {
         minutes: eastMinutes,
       },
     };
-
-    console.log(coordinate);
 
     variables.forEach((v) => {
       const { name, value } = v;
