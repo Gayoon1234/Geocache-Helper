@@ -22,7 +22,8 @@
         "foregroundImage": "./assets/images/logo.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.gayoon.geocachehelper"
+      "package": "com.gayoon.geocachehelper",
+      "versionCode": 2
     },
     "web": {
       "bundler": "metro",
