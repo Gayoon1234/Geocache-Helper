@@ -1,4 +1,11 @@
-import { Modal, Text, View, StyleSheet, Pressable } from "react-native";
+import {
+  Modal,
+  Text,
+  View,
+  StyleSheet,
+  Pressable,
+  StatusBar,
+} from "react-native";
 import Colors from "../../constants/Colors";
 import { FontAwesome } from "@expo/vector-icons";
 
@@ -15,6 +22,10 @@ const CustomModal: React.FC<CustomModalProps> = ({
 }) => {
   return (
     <Modal transparent={true} animationType="fade" visible={visible}>
+      <StatusBar
+        barStyle="light-content"
+        backgroundColor={Colors.theme.Pakistan}
+      />
       <View style={styles.modalContainer}>
         <Text style={styles.text}>{text}</Text>
         <Pressable

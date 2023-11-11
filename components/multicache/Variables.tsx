@@ -8,6 +8,7 @@ import {
   StyleSheet,
   Pressable,
   ImageBackground,
+  StatusBar,
 } from "react-native";
 import Tag from "../helper/tag";
 import Colors from "../../constants/Colors";
@@ -62,6 +63,10 @@ const Variables: React.FC<VariablesProps> = ({ variables, setVariables }) => {
           )}
         </View>
         <Modal visible={isModalVisible} transparent={true} animationType="fade">
+          {/* <StatusBar
+            barStyle="light-content"
+            backgroundColor={Colors.theme.Pakistan}
+          /> */}
           <View style={styles.modalContainer}>
             <TextInput
               style={styles.input}
@@ -161,7 +166,8 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "rgba(0, 0, 0, 0.8)",
+    backgroundColor: Colors.theme.Pakistan,
+    opacity: 0.9,
   },
   input: {
     width: "80%",
