@@ -35,20 +35,25 @@ const Calculator: React.FC<CalculatorProps> = ({ variables, savedPuzzle }) => {
   const [notes, setNotes] = useState("");
 
   useEffect(() => {
+    // const setPuzzle = async () => {
     if (savedPuzzle) {
+      setNorthMinutes(savedPuzzle.coordinates.lat.minutes);
       setNorthSouthDirection(savedPuzzle.coordinates.lat.direction);
       setNorthDegrees(savedPuzzle.coordinates.lat.degrees);
-      setNorthMinutes(savedPuzzle.coordinates.lat.minutes);
 
+      setEastMinutes(savedPuzzle.coordinates.long.minutes);
       setEastWestDirection(savedPuzzle.coordinates.long.direction);
       setEastDegrees(savedPuzzle.coordinates.long.degrees);
-      setEastMinutes(savedPuzzle.coordinates.long.minutes);
 
       setTitle(savedPuzzle.title);
       setNotes(savedPuzzle.notes);
       setFinalCoordinate("");
     }
   }, [savedPuzzle]);
+
+  useEffect(() => {
+    handleCalc();
+  }, [variables]);
 
   const copyToClipboard = () => {
     Clipboard.setString(finalCoordinate);
@@ -68,6 +73,8 @@ const Calculator: React.FC<CalculatorProps> = ({ variables, savedPuzzle }) => {
         minutes: eastMinutes,
       },
     };
+
+    console.log(coordinate);
 
     variables.forEach((v) => {
       const { name, value } = v;
@@ -122,6 +129,7 @@ const Calculator: React.FC<CalculatorProps> = ({ variables, savedPuzzle }) => {
     const formattedString = `${latString} ${longString}`;
 
     setFinalCoordinate(formattedString);
+    return formattedString;
   };
 
   const save = async () => {
