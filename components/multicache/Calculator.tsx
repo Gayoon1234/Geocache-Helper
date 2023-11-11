@@ -11,6 +11,7 @@ import { useSaveData } from "../../app/contexts/SaveDataContext";
 import SavedPuzzleModel from "../../app/models/SavedPuzzleModel";
 import Variable from "../../app/models/SavedPuzzleModel";
 import { LinearGradient } from "expo-linear-gradient";
+import CustomModal from "../helper/CustomModal";
 interface CalculatorProps {
   variables: Variable[];
   savedPuzzle: SavedPuzzleModel | null;
@@ -33,6 +34,7 @@ const Calculator: React.FC<CalculatorProps> = ({ variables, savedPuzzle }) => {
 
   const [title, setTitle] = useState("");
   const [notes, setNotes] = useState("");
+  const [visible, setVisible] = useState(false);
 
   useEffect(() => {
     if (savedPuzzle) {
@@ -56,7 +58,8 @@ const Calculator: React.FC<CalculatorProps> = ({ variables, savedPuzzle }) => {
 
   const copyToClipboard = () => {
     Clipboard.setString(finalCoordinate);
-    alert("The coordinates have been copied to the clipboard");
+    // alert("The coordinates have been copied to the clipboard");
+    setVisible(true);
   };
 
   const handleCalc = () => {
@@ -178,6 +181,11 @@ const Calculator: React.FC<CalculatorProps> = ({ variables, savedPuzzle }) => {
 
   return (
     <>
+      <CustomModal
+        text="The coordinates have been copied to the clipboard"
+        visible={visible}
+        setVisible={setVisible}
+      />
       <Text style={styles.heading}>Calculator</Text>
       <View style={styles.container}>
         <View style={styles.row}>

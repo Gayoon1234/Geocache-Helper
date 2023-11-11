@@ -4,6 +4,7 @@ import Colors from "../../constants/Colors";
 import SavedPuzzleCard from "../../components/saved/SavedPuzzleCard";
 import SavedPuzzleModel from "../models/SavedPuzzleModel";
 import { useSaveData } from "../contexts/SaveDataContext";
+import CustomModal from "../../components/helper/CustomModal";
 
 export default function TabTwoScreen() {
   const { saveData } = useSaveData();
