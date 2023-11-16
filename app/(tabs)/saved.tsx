@@ -1,13 +1,25 @@
-import { ImageBackground, ScrollView, StyleSheet } from "react-native";
+import {
+  ImageBackground,
+  Pressable,
+  ScrollView,
+  StyleSheet,
+} from "react-native";
 import { Text, View } from "../../components/Themed";
 import Colors from "../../constants/Colors";
 import SavedPuzzleCard from "../../components/saved/SavedPuzzleCard";
 import SavedPuzzleModel from "../models/SavedPuzzleModel";
 import { useSaveData } from "../contexts/SaveDataContext";
-import CustomModal from "../../components/helper/CustomModal";
+import { FontAwesome } from "@expo/vector-icons";
+import { useState } from "react";
+import MoreModal from "../../components/helper/MoreModal";
 
 export default function TabTwoScreen() {
   const { saveData } = useSaveData();
+  const [showMore, setShowMore] = useState(false);
+
+  const handleModal = () => {
+    setShowMore(true);
+  };
 
   return (
     <View style={styles.container}>
@@ -15,6 +27,15 @@ export default function TabTwoScreen() {
         source={require("../../assets/images/background2.jpg")}
         style={styles.backgroundImage}
       >
+        <FontAwesome
+          name="ellipsis-v"
+          size={40}
+          style={styles.menuIcon}
+          onPress={() => handleModal()}
+        />
+
+        <MoreModal visible={showMore} setVisible={setShowMore} />
+
         <View style={styles.top}>
           <Text style={styles.heading}>Saved Puzzles</Text>
           <Text style={styles.subtitle}>
@@ -68,5 +89,14 @@ const styles = StyleSheet.create({
     width: 340,
     backgroundColor: "rgba(0, 0, 0, 0.3)",
     alignSelf: "center",
+  },
+  menuIcon: {
+    marginTop: 20,
+    color: Colors.theme.TigersEye,
+    alignSelf: "flex-end",
+    padding: 10,
+    paddingTop: 20,
+    paddingHorizontal: 15,
+    position: "absolute",
   },
 });
