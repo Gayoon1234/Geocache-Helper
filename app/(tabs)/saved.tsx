@@ -1,13 +1,25 @@
-import { ImageBackground, ScrollView, StyleSheet } from "react-native";
+import {
+  ImageBackground,
+  Pressable,
+  ScrollView,
+  StyleSheet,
+} from "react-native";
 import { Text, View } from "../../components/Themed";
 import Colors from "../../constants/Colors";
 import SavedPuzzleCard from "../../components/saved/SavedPuzzleCard";
 import SavedPuzzleModel from "../models/SavedPuzzleModel";
 import { useSaveData } from "../contexts/SaveDataContext";
 import { FontAwesome } from "@expo/vector-icons";
+import { useState } from "react";
+import MoreModal from "../../components/helper/MoreModal";
 
 export default function TabTwoScreen() {
   const { saveData } = useSaveData();
+  const [showMore, setShowMore] = useState(false);
+
+  const handleModal = () => {
+    setShowMore(true);
+  };
 
   return (
     <View style={styles.container}>
@@ -19,8 +31,10 @@ export default function TabTwoScreen() {
           name="ellipsis-v"
           size={40}
           style={styles.menuIcon}
-          onPress={() => alert("EEE")}
+          onPress={() => handleModal()}
         />
+
+        <MoreModal visible={showMore} setVisible={setShowMore} />
 
         <View style={styles.top}>
           <Text style={styles.heading}>Saved Puzzles</Text>
