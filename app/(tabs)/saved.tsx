@@ -4,7 +4,7 @@ import Colors from "../../constants/Colors";
 import SavedPuzzleCard from "../../components/saved/SavedPuzzleCard";
 import SavedPuzzleModel from "../models/SavedPuzzleModel";
 import { useSaveData } from "../contexts/SaveDataContext";
-import CustomModal from "../../components/helper/CustomModal";
+import { FontAwesome } from "@expo/vector-icons";
 
 export default function TabTwoScreen() {
   const { saveData } = useSaveData();
@@ -15,6 +15,13 @@ export default function TabTwoScreen() {
         source={require("../../assets/images/background2.jpg")}
         style={styles.backgroundImage}
       >
+        <FontAwesome
+          name="ellipsis-v"
+          size={40}
+          style={styles.menuIcon}
+          onPress={() => alert("EEE")}
+        />
+
         <View style={styles.top}>
           <Text style={styles.heading}>Saved Puzzles</Text>
           <Text style={styles.subtitle}>
@@ -68,5 +75,14 @@ const styles = StyleSheet.create({
     width: 340,
     backgroundColor: "rgba(0, 0, 0, 0.3)",
     alignSelf: "center",
+  },
+  menuIcon: {
+    marginTop: 20,
+    color: Colors.theme.TigersEye,
+    alignSelf: "flex-end",
+    padding: 10,
+    paddingTop: 20,
+    paddingHorizontal: 15,
+    position: "absolute",
   },
 });
