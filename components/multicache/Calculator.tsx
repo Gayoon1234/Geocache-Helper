@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { Text } from "../Themed";
-import { Pressable, StyleSheet, TextInput, View } from "react-native";
+import { Linking, Pressable, StyleSheet, TextInput, View } from "react-native";
 import Colors from "../../constants/Colors";
-import { FontAwesome } from "@expo/vector-icons";
+import { FontAwesome, MaterialIcons } from "@expo/vector-icons";
 // import Clipboard from "@react-native-clipboard/clipboard";
 import { Clipboard } from "react-native";
 // import * as SecureStore from "expo-secure-store";
@@ -181,6 +181,14 @@ const Calculator: React.FC<CalculatorProps> = ({ variables, savedPuzzle }) => {
     setTitle("");
   };
 
+  const openGoogleMaps = () => {
+    //finalCoordinate
+    const googleMapsQuery = `https://www.google.com/maps/search/?api=1&query=${finalCoordinate}`;
+    Linking.openURL(googleMapsQuery).catch((err) =>
+      console.error("Error opening Google Maps:", err)
+    );
+  };
+
   return (
     <>
       <CustomModal text={modalText} visible={visible} setVisible={setVisible} />
@@ -229,7 +237,7 @@ const Calculator: React.FC<CalculatorProps> = ({ variables, savedPuzzle }) => {
           />
         </View>
 
-        <View style={styles.CalcSaveContainer}>
+        <View style={styles.ButtonContainer}>
           <Pressable
             onPress={handleCalc}
             style={[styles.fauxButton, { flex: 0.8 }]}
@@ -273,17 +281,28 @@ const Calculator: React.FC<CalculatorProps> = ({ variables, savedPuzzle }) => {
             {finalCoordinate}
           </Text>
           {/* )} */}
-
-          <Pressable
-            onPress={copyToClipboard}
-            style={[styles.fauxButton, { width: "80%", alignSelf: "center" }]}
-          >
-            <FontAwesome
-              name="copy"
-              style={{ textAlign: "center", color: Colors.theme.TigersEye }}
-              size={20}
-            />
-          </Pressable>
+          <View style={styles.ButtonContainer}>
+            <Pressable
+              onPress={copyToClipboard}
+              style={[styles.fauxButton, { width: "75%" }]}
+            >
+              <FontAwesome
+                name="copy"
+                style={{ textAlign: "center", color: Colors.theme.TigersEye }}
+                size={30}
+              />
+            </Pressable>
+            <Pressable
+              onPress={openGoogleMaps}
+              style={[styles.fauxButton, { width: "25%" }]}
+            >
+              <MaterialIcons
+                name="location-on"
+                size={30}
+                style={{ textAlign: "center", color: Colors.theme.TigersEye }}
+              />
+            </Pressable>
+          </View>
         </View>
         <Text style={[styles.heading, { paddingTop: 30 }]}>Notes</Text>
         <TextInput
@@ -299,7 +318,7 @@ const Calculator: React.FC<CalculatorProps> = ({ variables, savedPuzzle }) => {
           textAlignVertical="top"
         ></TextInput>
         <Text style={[styles.heading, { paddingTop: 30 }]}>Save As</Text>
-        <View style={[styles.CalcSaveContainer, { paddingBottom: 200 }]}>
+        <View style={[styles.ButtonContainer, { paddingBottom: 200 }]}>
           <TextInput
             style={styles.titleInput}
             placeholder="Title"
@@ -365,7 +384,7 @@ const styles = StyleSheet.create({
     flex: 0.2,
     ...baseInputStyle,
   },
-  CalcSaveContainer: {
+  ButtonContainer: {
     display: "flex",
     flexDirection: "row",
     width: "80%",
